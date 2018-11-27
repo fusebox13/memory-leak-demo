@@ -1,7 +1,8 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <img alt="Vue logo" src="../assets/death-skull.svg">
+    <HelloWorld v-if="exists" msg="DO BAD THINGS"/>
+    <button @click="toggle">v-if Memory Leak Component</button>
   </div>
 </template>
 
@@ -14,5 +15,16 @@ import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
     HelloWorld
   }
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  exists: boolean = true;
+  toggle() {
+    this.exists = !this.exists;
+  }
+}
 </script>
+<style lang="scss" scoped>
+img {
+  width: 20%;
+  height: 20%;
+}
+</style>

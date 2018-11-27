@@ -2,6 +2,7 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <button @click="leakMemory">Leak Memory</button>
+    <button @click="periodLeak">Periodic Leak</button>
     <button @click="useInternalMemory">Leak Internal</button>
     <button @click="dumpHeapStats">Get Heap Stats</button>
     <ul>
@@ -48,6 +49,12 @@ export default class HelloWorld extends Vue {
   dumpHeapStats() {
     console.log(performance.memory);
     this.heapSnapShots.push(performance.memory);
+  }
+  periodLeak() {
+    for (let i = 0; i < 10; i++) {
+      console.log("Leaking memory");
+      setTimeout(this.leakMemory(), 1000);
+    }
   }
 }
 </script>

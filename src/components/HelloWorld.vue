@@ -15,6 +15,8 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { EventBus } from "@/services/event-bus.js";
+
 let x: string[] = [];
 @Component
 export default class HelloWorld extends Vue {
@@ -32,9 +34,15 @@ export default class HelloWorld extends Vue {
     this.count = 0;
     //this.useInternalMemory();
     this.dumpHeapStats();
+    //this.leakEvents();
   }
-  beforeDestroy() {
-    console.log("Destroying Array:", this.q);
+  beforeDestroy() {}
+  leakEvents() {
+    EventBus.$on("leaky-event", () => {
+      console.log("Watch me duplicate!");
+    });
+
+    EventBus.$emit("leaky-event");
   }
   leakMemory() {
     for (var i = 0; i < 10000; i++) {
@@ -47,7 +55,6 @@ export default class HelloWorld extends Vue {
   }
 
   dumpHeapStats() {
-    console.log(performance.memory);
     this.heapSnapShots.push(performance.memory);
   }
   periodLeak() {
@@ -63,6 +70,7 @@ h3 {
   margin: 40px 0 0;
 }
 li {
+  color: lightgrey;
   display: block;
   margin: 0 10px;
 }

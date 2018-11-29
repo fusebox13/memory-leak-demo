@@ -1,5 +1,5 @@
 <template>
-  <div>I am immortal!!!!!!!!!!!!!</div>
+  <div>I am immortal!</div>
 </template>
 
 <script>
@@ -37,9 +37,8 @@ export default {
     //EventBus.$off();
 
     //this.fatten();
-    // let self = this;
     // setTimeout(()=> {
-    //   console.log(self);
+    //   console.log(this);
     // }, 1000);
 
     //setTimeout(this.safeLog, 1000);
@@ -51,4 +50,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+div {
+  color: white;
+  font-size: 3em;
+}
 </style>
